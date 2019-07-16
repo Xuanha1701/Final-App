@@ -1,12 +1,27 @@
 <div class="homepage">
-  <div class='form-upload'>
-    <%= render 'upload_form' %>
+  <div class="tab-main">
+    <ul id="my-tab" class="nav nav-tabs nav-pills">
+      <li class="nav-item">
+        <a data-toggle="tab" class="nav-link fa fa-picture-o active" href="#profile"> Photos</a>
+      </li>
+      <li class="nav-item">
+        <a data-toggle="tab" class="nav-link fa fa-file-image-o material-icons" href="#new"> Albums</a>
+      </li>
+      <li class="nav-item">
+        <a data-toggle="tab" class="nav-link fa fa-newspaper-o" href="#post"> Posts</a>
+      </li>
+    </ul>
   </div>
-
-  <div class="posts">
-    <% @posts.each do |post| %>
-      <%= render partial: 'post', locals: { post: post } %>
-    <% end %>
-    <%= paginate @posts %>
+  <div class="tab-content my-padding">
+    <div id="profile" class="tab-pane fade in" role="tabpanel">
+      <span>Hello, user!</span>
+    </div>
+    <div id="new" class="tab-pane active fade show" role="tabpanel">
+      <span>Hello, user11!</span>
+    </div>
+    <div id="post" class="tab-pane active fade show" role="tabpanel">
+       <%= render partial: "components/post"%>
+    </div>
   </div>
 </div>
+

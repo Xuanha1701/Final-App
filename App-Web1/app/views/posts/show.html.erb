@@ -13,6 +13,13 @@
       </div>
       <%= link_to @post.user.username, user_path(@post.user), class: 'username' %>
     </div>
+    <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+<% if pre_like %>
+  <%= button_to 'Unlike', post_like_path(@post, pre_like), method: :delete %>
+<% else %>
+  <%= button_to 'Like', post_likes_path(@post), method: :post %>
+<% end %>
+    <p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
     <div class="description">
       <%= render partial: "description", locals: {post: @post} %>
     </div>
@@ -20,6 +27,11 @@
       <% if current_user.posts.exists?(@post.id) %>
         <%= link_to 'Remove', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
+       <!--Comment Post name body -->
+      <h2><%= @post.comments.count %> Comments</h2>
+          <%= render @post.comments %>
+      <h3>Add a Comments: </h3>
+          <%= render 'comments/form' %>
     </div>
   </div>
 </div>

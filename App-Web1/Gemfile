@@ -21,7 +21,10 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'kaminari'
-gem 'carrierwave'
+gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
+gem 'mini_magick', '~> 4.5', '>= 4.5.1'
+gem 'rails-bootstrap-tabs'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
