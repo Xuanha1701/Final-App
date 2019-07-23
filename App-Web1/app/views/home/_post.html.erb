@@ -2,13 +2,13 @@
 <section class="post">
   <div class="user">
     <div class="avatar">
-      <% if post.user.avatar.attached? %>
+      <% if !post.user.avatars.file.nil? %>
         <%= link_to user_path(post.user) do %>
-          <%= image_tag post.user.avatar %>
+          <%= image_tag post.user.avatars.url %>
         <% end %>
       <% end %>
     </div>
-    <%= link_to post.user.username, user_path(post.user), class: 'username' %>
+    <%= link_to post.user.first_name, user_path(post.user), class: 'username' %>
   </div>
   <%= image_tag post.image, class: 'main-image' %>
   <div class="description">
@@ -18,3 +18,5 @@
 
   </div>
 </section>
+
+

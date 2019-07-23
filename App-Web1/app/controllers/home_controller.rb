@@ -1,9 +1,12 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!
+  protect_from_forgery prepend: true
+
   def index
-    if current_user
-      @posts = Post.order(created_at: :desc).page(params[:page]).per(5)
-    else
-      redirect_to new_user_session_path
-    end
+    @user = current_user
+    @photos = Photo.public_photos.page(params[:page])
+    @albums = Album.includes(:photos).page(params[:page])
+    @photo = Photo.new
+    @album = Album.new
   end
 end

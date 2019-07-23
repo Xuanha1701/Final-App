@@ -1,0 +1,31 @@
+  <div class="site-wrap">
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+    <main class="main-content">
+      <div class="container-fluid photos">
+        <div class="row pt-4 mb-5 text-center">
+          <div class="col-12">
+            <h2 class="text-black mb-4">'<%= @current_album.title %>' &mdash; <%= @current_album.photos.size%> photos </h2>
+          </div>
+        </div>
+        <div class="row align-items-stretch">
+          <% for i in 0...@album_photos.size %>
+          <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+            <a href="<%= @album_photos[i].image.url %>" class="d-block photo-item" data-fancybox="gallery">
+              <%= image_tag @album_photos[i].image.url, alt:"Image", class:"img-fluid"%>
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <%end%>
+        </div>
+      </div>
+    </main>
+</div>

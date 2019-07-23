@@ -12,6 +12,19 @@ class ImageUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
+  def cache_dir
+    '/tmp/projectname-cache'
+  end
+
+  def extension_whitelist
+    %w(jpg jpeg gif png)
+  end
+   def content_type_whitelist
+    /image\//
+  end
+  def content_type_blacklist
+    ['application/text', 'application/json']
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)

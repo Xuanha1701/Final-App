@@ -1,25 +1,40 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update]
-
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
   def show
-    @user  = User.find(params[:id])
-    @posts = @user.posts.order(created_at: :desc)
+    @user = User.find(params[:id])
+    @photos = Photo.all
+    @user_all = User.all
+  end
 
+  def myprofile
+    @user = current_user
+    @photos = Photo.all
+    @user_all = User.all
   end
 
   def edit
+  end
 
-    @user = User.find(params[:id])
+  def create
+
   end
 
   def update
-    current_user.update(user_params)
-    redirect_to current_user
+    if current_user.update(update_basic_params)
+      redirect_to current_user
+    else
+      render 'edit'
+    end
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:username, :name, :website,:bio, :email, :phone, :gender, :avatar)
-  end
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :website,:bio, :email, :phone, :gender, :avatars, :role)
+    end
+
+    def update_basic_params
+      params.require(:user).permit(:first_name,:avatars,:last_name,:email)
+    end
+
 end

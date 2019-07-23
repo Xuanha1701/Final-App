@@ -1,0 +1,61 @@
+<div class="modal fade" id="modal-follow" tabindex="-1" role="dialog" aria-labelledby="modal-follow" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content follower">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Follower</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% unless @user_all.ids.empty? %>
+          <% @user_all.each do |user|%>
+            <div class="d-flex bd-highlight">
+              <% unless current_user.following?(user) %>
+                <div class="p-2 w-100 bd-highlight">
+                  <%= image_tag user.avatars_url.to_s, class: 'avatar-follow' %>
+                    <%= link_to user.first_name,user_path(user.id),data: {id: "#{user.id}"}%>
+                </div>
+                <div class="p-2 flex-shrink-1 bd-highlight">
+                    <%= button_to "Follow", follows_path(id: "#{user.id}") ,class: "btn btn-primary" %>
+                </div>
+              <% end %>
+            </div>
+           <%end%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="modal-following" tabindex="-1" role="dialog" aria-labelledby="modal-following" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Following</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% unless @user_all.ids.empty? %>
+          <% @user_all.each do |user|%>
+            <div class="d-flex bd-highlight">
+              <% if current_user.following?(user) %>
+                <div class="p-2 w-100 bd-highlight">
+                  <%= image_tag user.avatars_url.to_s, class: 'avatar-follow' %>
+                  <%= link_to user.first_name,user_path(user.id),data: {id: "#{user.id}"}%>
+                </div>
+                <div class="p-2 flex-shrink-1 bd-highlight">
+                  <%= button_to "Unfollow", follow_path(id: user.id),method: :delete, class: "btn btn-default"  %>
+                </div>
+              <% end %>
+            </div>
+           <%end%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

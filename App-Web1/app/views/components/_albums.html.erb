@@ -1,0 +1,32 @@
+<div class='form-upload'>
+  <%= render 'album_form' %>
+</div>
+<div class="site-wrap">
+  <div class="container-fluid photos">
+    <div class="row align-items-stretch">
+      <% if albums.any?%>
+        <% for i in 0...albums.size %>
+          <% if albums[i].photos.any? %>
+            <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up">
+                <% if albums.ids.any? %>
+                  <a href="<%= album_path(albums.ids[i])%>" class="d-block photo-item">
+                <%end%>
+                  <img src="<%= albums[i].photos[0].image.url %>">
+                <hr>
+                <div class="photo-text-more">
+                  <div class="photo-text-more">
+                    <h3 class="heading"><%= albums[i].title %></h3>
+                    <span class="meta"><%= albums[i].photos.size %> Photos</span>
+                  </div>
+                </div>
+                </a>
+              </div>
+          <%end%>
+        <%end%>
+      <%end%>
+    </div>
+     <%= paginate albums  %>
+  </div>
+</div>
+
+

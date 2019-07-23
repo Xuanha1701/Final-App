@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
@@ -27,7 +28,7 @@
           <a><i class="fa fa-compass"></i></a>
           <a><i class="fa fa-heart"></i></a>
           <% if user_signed_in? %>
-            <a href="<%= user_path(current_user)%>" >
+            <a href="<%= profile_me_path %>" >
               <i class="fa fa-user"></i>
             </a>
           <% else %>
@@ -41,6 +42,8 @@
 
     <!--Main content-->
     <main class="container" style="min-height: 500px;">
+          <p id="notice"><%= notice %></p>
+
       <%= yield %>
     </main>
 
@@ -64,5 +67,7 @@
         <p> © 2018 INSTAGRAM </p>
       </nav>
     </footer>
+
   </body>
+
 </html>

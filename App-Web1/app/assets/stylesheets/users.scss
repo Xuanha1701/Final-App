@@ -6,8 +6,8 @@
 
 .profile .avatar{
   .wrapper{
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 165px;
     margin: 40px auto;
   }
   .wrapper img{
@@ -146,7 +146,7 @@ a.tab{
 
 .form-edit-user{
   padding: 30px 100px 10px 50px;
-.form-group, input{
+  .form-group, input{
     font-size: 14px;
     color: black;
   }
@@ -157,7 +157,7 @@ a.tab{
     text-align: right;
     font-weight: 600;
   }
-.avatar{
+  .avatar{
     height: 38px;
     width: 38px;
     border-radius: 50%;
@@ -181,4 +181,19 @@ a.tab{
 .rounded-circle{
   height: 40px;
   width: 40px;
+}
+
+.follower{
+    height: auto;
+    width: 318px;
+    margin: auto;
+    .modal-body{
+      .avatar-follow{
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
+     }
+
+    }
+
 }

@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+
   def index
     if params[:query].start_with?('#')
       query  = params[:query].gsub('#', '')
@@ -7,4 +8,5 @@ class SearchController < ApplicationController
       @posts = Post.where("description like ?", "%#{params[:query]}%")
     end
   end
+
 end

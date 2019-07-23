@@ -3,19 +3,22 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_many :photos, as: :photoable
+  has_many :albums
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_one_attached :avatar
+  # has_one_attached :avatar
   has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
   has_many :followers, through: :follower_relationships, source: :follower
-
   has_many :following_relationships, foreign_key: :follower_id, class_name: 'Follow'
   has_many :following, through: :following_relationships, source: :following
-  # mount_uploader :avatar, AvatarUploader
-  # attr_accessor :email, :password, :avatar, :avatar_cache, :remove_avatar
+  mount_uploader :avatars, AvatarUploader
+  has_many :albums_photos, -> {order "created_at desc"},through: :albums, source: :photos
+  # attr_accessor :email, :password, :remember_me, :avatar, :avatar_cache, :remove_avatar
 
 
-   def follow(user)
+
+  def follow(user)
 
     following_relationships.create(following_id: user.id)
   end
@@ -26,6 +29,6 @@ class User < ApplicationRecord
 
   def following?(user)
     following.include?(user)
-
   end
+
 end

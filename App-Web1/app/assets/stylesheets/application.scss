@@ -9,15 +9,15 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
- *
  *= require_tree .
  *= require_self
  */
 @import "bootstrap";
 @import "font-awesome";
 @import "users";
-
-
+@import "photos";
+@import "fancybox";
+@import "style";
 
 .container{
   max-width: 1000px;
@@ -103,6 +103,10 @@
     height: 35px;
   }
 }
+
+
+
+
 
 
 
