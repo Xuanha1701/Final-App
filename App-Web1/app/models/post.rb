@@ -1,9 +1,8 @@
 class Post < ApplicationRecord
 
-  has_many :likes, dependent: :destroy
 
 
-  belongs_to :user
+  # belongs_to :user
   # has_one_attached :image
 
   # has_many :post_hash_tags
@@ -26,5 +25,5 @@ class Post < ApplicationRecord
   #   description.to_s.scan(/#\w+/).map{|name| name.gsub("#", "")}
   # end
 
-  scope :of_followed_users, -> (following_users) { where user_id: following_users }
+  # scope :of_followed_users, -> (following_users) { where user_id: following_users }
 end

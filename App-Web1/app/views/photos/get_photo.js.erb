@@ -1,0 +1,15 @@
+<% author = @photo.photoable_type == "User" ? @photo.photoable : @photo.photoable.user %>
+
+$(".modal-title").text("<%= j ("#{@photo.title}") %>")
+
+$(".text-primary").text("<%= j ("#{author.name}") %>")
+$(".text-three").text("<%= j ("#{@photo.likes.count} #{(@photo.likes.count) == 1 ? 'Like' : 'Likes'}") %>")
+$(".text-secondary").text("<%= j ("#{@photo.description}") %>")
+
+<% pre_like = @photo.likes.where { |like| like.user_id == current_user.id} %>
+<% if pre_like %>
+  $(".fa.fa-thumbs-up")
+<% else %>
+  $(".fa.fa-thumbs-up.fa-thumbs-down")
+<% end %>
+$("#my-modal").modal('show')

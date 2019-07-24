@@ -1,18 +1,27 @@
 class LikesController < ApplicationController
-  before_action :find_post
-  before_action :find_like, only: [:destroy]
-
+  # before_action :find_post
+  before_action :authenticate_user!
+  # before_action :find_like, only: [:destroy]
     def create
-      if already_liked?
-        flash[:notice] = "You can't like more than once"
+      @user = current_user.id
+      @photo = Photo.find(params_data_photo)
+      likes = {user_id: @user, photo_id: @photo}
+      @like = Like.new(likes)
+
+      @like.save!
+      if @like.save
+        redirect_to user_path(@user)
       else
-        @post.likes.create(user_id: current_user.id)
+       redirect_to photo_path
       end
-        redirect_to post_path(@post)
     end
 
     def find_like
-      @like = @post.likes.find(params[:id])
+      @like = @photo.likes.find(params[:id])
+    end
+
+    def index
+      redirect_to root_path
     end
 
     def destroy
@@ -21,17 +30,20 @@ class LikesController < ApplicationController
       else
         @like.destroy
       end
-      redirect_to post_path(@post)
+      redirect_to photo_path(@photo)
     end
 
   private
 
-    def find_post
-      @post = Post.find(params[:post_id])
-    end
+    # def find_post
+    #   @photo = Photo.find(params[:id])
+    #   byebug
+    # end
 
-    def already_liked?
-    Like.where(user_id: current_user.id, post_id:
-    params[:post_id]).exists?
-    end
+    # def already_liked?
+    # Like.where(user_id: current_user.id, photo_id: params[:id]).exists?
+    # end
+    # def params_data_photo
+    #      params.require(:data).permit(:data)
+    # end
 end

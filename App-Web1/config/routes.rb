@@ -17,11 +17,15 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :update, :destroy] do
   end
   resources :posts, only: [:new, :create, :show, :destroy] do
-    resources :likes
     resources :comments
   end
+
   resources :follows, only: [:create, :destroy]
-  resources :photos, only: [:new, :create, :show, :destroy]
+  resources :photos, only: [:new, :create, :show, :destroy] do
+    post :likes
+    delete :unlike
+    get :get_photo
+  end
   resources :albums, only: [:new, :create, :show, :destroy]
 
   get 'search' => 'search#index'

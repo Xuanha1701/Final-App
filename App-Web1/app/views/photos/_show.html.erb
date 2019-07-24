@@ -4,7 +4,7 @@
       <div class="row align-items-stretch">
         <div class="gallery">
             <% @photos.each do |p| %>
-            <%= image_tag p.image_url.to_s ,class: "image", data: { toggle: "modal", bigimage: p.image.url,  target: "#my-modal"} %>
+              <%= image_tag p.image_url.to_s ,class: "image", data: { id: p.id, toggle: "modal", bigimage: p.image.url} %>
           <% end %>
         </div>
       </div>

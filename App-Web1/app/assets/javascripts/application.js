@@ -48,23 +48,59 @@ $('.image-upload-wrap').bind('dragover', function () {
   $('.image-upload-wrap').bind('dragleave', function () {
     $('.image-upload-wrap').removeClass('image-dropping');
 });
+ function myFunction(x) {
+  x.classList.toggle("fa-thumbs-down");
+}
+
+
 
 $(document).on('turbolinks:load', function() {
   var $imageSrc;
+  var $idimg;
   $('.site-wrap').on("click", ".gallery img", function() {
     $imageSrc = $(this).data('bigimage');
+    $idimg = $(this).data('id');
+
 });
 // when the modal is opened autoplay it
+
+$(document).on('click', '.image', function(){
+    id = $(this).attr('data-id')
+
+    $.ajax({
+      url : `/photos/${id}/get_photo`,
+      type : "GET"
+  });
+})
+
 $(document).on('shown.bs.modal', '#my-modal', function (e) {
-// set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
   $("#image").attr('src', $imageSrc  );
+  $("#image").attr('data-id', $idimg  );
+
+
+
 })
 // reset the modal image
 $(document).on('hide.bs.modal', '#my-modal', function (e) {
     // a poor man's stop video
     $("#image").attr('src','');
 })
+
 // document ready
+  $('.modal').on('click', '.fa-thumbs-up', function(){
+      idlike = $('.modal img').attr('data-id')
+      $.ajax({
+          url : `/photos/${idlike}/likes`,
+          type : "POST"
+      });
+    });
+  $('.modal').on('click', '.fa-thumbs-down', function(){
+      idunlike = $('.modal img').attr('data-id')
+      $.ajax({
+          url : `/photos/${idunlike}/unlike`,
+          type : "DELETE"
+      });
+    });
 });
 
 
