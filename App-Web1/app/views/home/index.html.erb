@@ -1,0 +1,31 @@
+<div class="homepage">
+  <div class="tab-main">
+    <ul id="my-tab" class="nav nav-tabs nav-pills">
+      <li class="nav-item">
+        <a data-toggle="tab" data-turbolinks="false"  class="nav-link fa fa-picture-o active" href="#profile"> Photos</a>
+      </li>
+      <li class="nav-item">
+        <a data-toggle="tab" class="nav-link fa fa-file-image-o material-icons" href="#new"> Albums</a>
+      </li>
+      <li class="nav-item">
+        <a data-toggle="tab" class="nav-link fa fa-newspaper-o" href="#post"> Posts</a>
+      </li>
+    </ul>
+  </div>
+  <div class="tab-content my-padding">
+    <div id="profile" class="tab-pane fade active show" role="tabpanel">
+      <button type="button" class="float-right btn btn-success" >Add photo</button>
+      <%= render partial: "components/photo"%>
+      <%= render partial: "photos/show"%>
+
+    </div>
+    <div id="new" class="tab-pane fade in" role="tabpanel">
+      <%= render partial: "components/albums", locals: {albums: @albums}%>
+
+    </div>
+    <div id="post" class="tab-pane fade " role="tabpanel">
+     <%#= render partial: "components/post"%>
+   </div>
+ </div>
+</div>
+

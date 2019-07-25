@@ -1,0 +1,16 @@
+  <%= render partial: "components/modal_photo"%>
+  <div class="site-wrap">
+    <div class="container-fluid photos">
+      <div class="row align-items-stretch">
+        <div class="gallery">
+            <% @photos.each do |p| %>
+              <%= image_tag p.image_url.to_s ,class: "image", data: { id: p.id, toggle: "modal", bigimage: p.image.url} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+      <%= paginate @photos   %>
+  </div>
+
+
+
